@@ -2,6 +2,8 @@ package br.unitins.topicos1.resource;
 
 import java.util.List;
 
+import br.unitins.topicos1.dto.EstadoDTO;
+import br.unitins.topicos1.dto.EstadoResponseDTO;
 import br.unitins.topicos1.model.Estado;
 import br.unitins.topicos1.repository.EstadoRepository;
 import jakarta.inject.Inject;
@@ -27,44 +29,59 @@ public class EstadoResource {
     @GET
 
     @Path("/{id}")
-    public Estado findById(@PathParam("id") Long id) {
-        return estadoRepository.findById(id);
+    public EstadoResponseDTO findById(@PathParam("id") Long id) {
+        return EstadoResponseDTO.valueOf(estadoRepository.findById(id));
     }
 
     @GET
-    public List<Estado> findAll() {
-        return estadoRepository.listAll();
+    public List<EstadoResponseDTO> findAll() {
+        // List<Estado> lista = estadoRepository.listAll();
+        // List<EstadoResponseDTO> listaDto = new ArrayList<EstadoResponseDTO>();
+        // for (Estado estado : lista) {
+        //     listaDto.add(EstadoResponseDTO.valueOf(estado));
+        // }
+        // return listaDto;
+
+        return estadoRepository
+            .listAll()
+            .stream()
+            .map(e -> EstadoResponseDTO.valueOf(e)).toList();
     }
 
     @GET
     @Path("/search/nome/{nome}")
-    public List<Estado> findByNome(@PathParam("nome") String nome) {
-        return estadoRepository.findByNome(nome);
+    public List<EstadoResponseDTO> findByNome(@PathParam("nome") String nome) {
+        return estadoRepository.findByNome(nome).stream()
+        .map(e -> EstadoResponseDTO.valueOf(e)).toList();
     }
 
     @GET
     @Path("/search/sigla/{sigla}")
-    public List<Estado> findBySigla(@PathParam("sigla") String sigla) {
-        
-        return estadoRepository.findBySigla(sigla);
+    public List<EstadoResponseDTO> findBySigla(@PathParam("sigla") String sigla) {
+        return estadoRepository.findBySigla(sigla).stream()
+        .map(e -> EstadoResponseDTO.valueOf(e)).toList();
     }
 
 
     @POST
     @Transactional
-    public Estado create(Estado estado) {
+    public EstadoResponseDTO create(EstadoDTO dto) {
+        Estado estado = new Estado();
+        estado.setNome(dto.nome());
+        estado.setSigla(dto.sigla());
+
         estadoRepository.persist(estado);
-        return estado;
+        return EstadoResponseDTO.valueOf(estado);
     }
 
     @PUT
     @Transactional
     @Path("/{id}")
-    public void update(@PathParam("id") Long id, Estado estado) {
+    public void update(@PathParam("id") Long id, EstadoDTO dto) {
         Estado estadoBanco =  estadoRepository.findById(id);
 
-        estadoBanco.setNome(estado.getNome());
-        estadoBanco.setSigla(estado.getSigla());
+        estadoBanco.setNome(dto.nome());
+        estadoBanco.setSigla(dto.sigla());
   
     }
 

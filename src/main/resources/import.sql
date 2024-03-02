@@ -6,3 +6,7 @@ insert into pessoa (id, nome, cpf) values(4, 'Carlos Henrique', '444');
 
 insert into estado (nome, sigla) values('Tocantins', 'TO');
 insert into estado (nome, sigla) values('Goias', 'GO');
+
+insert into cidade (nome, id_estado) values('Palmas', 1);
+insert into cidade (nome, id_estado) values('Paraíso', 1);
+insert into cidade (nome, id_estado) values('Goiânia', 2);
