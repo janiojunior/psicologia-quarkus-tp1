@@ -6,6 +6,7 @@ import br.unitins.topicos1.dto.EstadoDTO;
 import br.unitins.topicos1.dto.EstadoResponseDTO;
 import br.unitins.topicos1.service.EstadoService;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -51,7 +52,7 @@ public class EstadoResource {
     }
 
     @POST
-    public Response create(EstadoDTO dto) {
+    public Response create(@Valid EstadoDTO dto) {
         return Response.status(Status.CREATED).entity(estadoService.create(dto)).build();
     }
 
