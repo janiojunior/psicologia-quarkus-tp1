@@ -52,7 +52,7 @@ public class EstadoResource {
     }
 
     @POST
-    public Response create(@Valid EstadoDTO dto) {
+    public Response create(EstadoDTO dto) {
         return Response.status(Status.CREATED).entity(estadoService.create(dto)).build();
     }
 
