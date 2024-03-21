@@ -6,6 +6,7 @@ import br.unitins.topicos1.dto.EstadoDTO;
 import br.unitins.topicos1.dto.EstadoResponseDTO;
 import br.unitins.topicos1.model.Estado;
 import br.unitins.topicos1.repository.EstadoRepository;
+import br.unitins.topicos1.validation.ValidationException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -20,12 +21,20 @@ public class EstadoServiceImpl implements EstadoService {
     @Override
     @Transactional
     public EstadoResponseDTO create(@Valid EstadoDTO dto) {
+        validarNomeEstado(dto.nome());
+
         Estado estado = new Estado();
         estado.setNome(dto.nome());
         estado.setSigla(dto.sigla());
 
         estadoRepository.persist(estado);
         return EstadoResponseDTO.valueOf(estado);
+    }
+
+    public void validarNomeEstado(String nome) {
+        Estado estado = estadoRepository.findByNomeCompleto(nome);
+        if (estado != null)
+            throw  new ValidationException("nome", "O nome '"+nome+"' já existe.");
     }
 
     @Override
