@@ -1,12 +1,44 @@
 package br.unitins.topicos1.model;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 
 @Entity
-public class Pessoa extends PanacheEntity {
+public class Pessoa extends DefaultEntity {
 
-    public String nome;
-    public String cpf;
-    
+    private String nome;
+    private Sexo sexo;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id_pessoa")
+    private List<Telefone> listaTelefone;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    public List<Telefone> getListaTelefone() {
+        return listaTelefone;
+    }
+
+    public void setListaTelefone(List<Telefone> listaTelefone) {
+        this.listaTelefone = listaTelefone;
+    }
+
 }
