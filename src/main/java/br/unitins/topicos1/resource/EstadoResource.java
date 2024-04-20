@@ -1,12 +1,8 @@
 package br.unitins.topicos1.resource;
 
-import java.util.List;
-
 import br.unitins.topicos1.dto.EstadoDTO;
-import br.unitins.topicos1.dto.EstadoResponseDTO;
 import br.unitins.topicos1.service.EstadoService;
 import jakarta.inject.Inject;
-import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -66,8 +62,8 @@ public class EstadoResource {
     @DELETE
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id) {
-        estadoService.delete(id);
         return Response.status(Status.NO_CONTENT).build();
+            
     }
 
 

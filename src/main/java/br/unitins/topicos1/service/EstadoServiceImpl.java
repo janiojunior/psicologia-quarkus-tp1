@@ -54,7 +54,10 @@ public class EstadoServiceImpl implements EstadoService {
 
     @Override
     public EstadoResponseDTO findById(Long id) {
-        return EstadoResponseDTO.valueOf(estadoRepository.findById(id));
+        Estado estado = estadoRepository.findById(id);
+        if (estado != null)
+            return EstadoResponseDTO.valueOf(estado);
+        return null;
     }
 
     @Override
