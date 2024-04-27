@@ -1,0 +1,117 @@
+@startuml
+
+class Estado {
+    - nome: String 
+    - sigla: String
+}
+
+class Cidade {
+    - nome: String
+}
+
+class Pessoa {
+    - nome: String
+}
+
+class PessoaFisica {
+    - cpf: String
+}
+
+class Telefone {
+    - codigoArea: String
+    - numero: String
+}
+
+class Paciente {
+    
+}
+
+class Psicologo {
+    -crp: String
+}
+
+class Usuario {
+    - username: String
+    - senha: String
+}
+
+enum Sexo {
+    + FEMININO: int
+    + MASCULINO: int
+}
+
+class Consulta {
+    - nome: String
+    - preco: Double
+}
+
+class ConsultaAvulsa {
+
+}
+
+class PacoteConsulta {
+    - quantidade: Integer
+}
+
+enum TipoConsulta {
+    + EMERGENCIA: int
+    + PRIMEIRA_CONSULTA: int
+    + NORMAL: int
+}
+
+class Pedido {
+    - data: LocalDateTime
+    - total: Double
+
+}
+
+class ItemPedido {
+    - preco: Double
+    - desconto: Double
+}
+
+
+
+enum StatusPedido {
+    - CONCLUIDO: int
+    - CANCELADO: int
+    - ENVIADO: int
+    - PAGAMENTO_PENDENTE: int
+    - PAGO: int
+}
+
+class FormaPagamento {
+    - parcela: int
+    - dataPagamento: LocalDateTime
+}
+
+enum TipoPagamento {
+    + CREDITO: int
+    + DEBITO : int
+    + PIX: int
+}
+
+Pessoa "*" --> "1" Sexo 
+Pessoa "1" *--> "*" Telefone
+
+PessoaFisica -up-|> Pessoa
+PessoaFisica "1" --> "1" Usuario
+
+Cidade "*" --> "1" Estado
+
+Paciente "1" --> "1" PessoaFisica
+Paciente "*" --> "1" Cidade: "naturalidade"
+
+Psicologo "1" --> "1" PessoaFisica
+
+ConsultaAvulsa -up-|> Consulta
+PacoteConsulta -up-|> Consulta
+
+ConsultaAvulsa "*" --> "1" TipoConsulta
+
+Pedido "*" --> "1" Paciente
+Pedido "1" *--> "*" ItemPedido
+
+ItemPedido "*" --> "1" Consulta
+
+@enduml
