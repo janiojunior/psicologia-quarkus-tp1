@@ -31,13 +31,17 @@ public class PsicologoServiceImpl implements PsicologoService {
     @Inject
     public UsuarioRepository usuarioRepository;
 
+    @Inject
+    public HashService hashService;
+
     @Override
     @Transactional
     public PsicologoResponseDTO create(@Valid PsicologoDTO dto) {
 
         Usuario usuario = new Usuario();
         usuario.setUsername(dto.username());
-        usuario.setSenha(dto.senha());
+        // gereando o hash da senha
+        usuario.setSenha(hashService.getHashSenha(dto.senha()));
 
         // salvando o usuario
         usuarioRepository.persist(usuario);
