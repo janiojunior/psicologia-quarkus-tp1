@@ -70,8 +70,6 @@ class ItemPedido {
     - desconto: Double
 }
 
-
-
 enum StatusPedido {
     - CONCLUIDO: int
     - CANCELADO: int
