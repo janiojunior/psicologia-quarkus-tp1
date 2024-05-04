@@ -5,7 +5,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
 @Entity
-public class PessoaFisica extends DefaultEntity {
+public class PessoaFisica extends Pessoa {
 
     private String cpf;
 
