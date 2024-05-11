@@ -6,6 +6,7 @@ import java.util.List;
 import br.unitins.topicos1.dto.PsicologoDTO;
 import br.unitins.topicos1.dto.PsicologoResponseDTO;
 import br.unitins.topicos1.dto.TelefoneDTO;
+import br.unitins.topicos1.dto.UsuarioResponseDTO;
 import br.unitins.topicos1.model.PessoaFisica;
 import br.unitins.topicos1.model.Psicologo;
 import br.unitins.topicos1.model.Sexo;
@@ -115,6 +116,11 @@ public class PsicologoServiceImpl implements PsicologoService {
     public List<PsicologoResponseDTO> findByNome(String nome) {
         return psicologoRepository.findByNome(nome).stream()
         .map(e -> PsicologoResponseDTO.valueOf(e)).toList();
+    }
+
+    public UsuarioResponseDTO login(String username, String senha) {
+        Psicologo psicologo = psicologoRepository.findByUsernameAndSenha(username, senha);
+        return UsuarioResponseDTO.valueOf(psicologo.getPessoaFisica());
     }
 
 }

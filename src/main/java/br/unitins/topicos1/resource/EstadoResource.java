@@ -2,6 +2,7 @@ package br.unitins.topicos1.resource;
 
 import br.unitins.topicos1.dto.EstadoDTO;
 import br.unitins.topicos1.service.EstadoService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -31,11 +32,13 @@ public class EstadoResource {
     }
 
     @GET
+    @RolesAllowed({"Psicologo", "Paciente"})
     public Response findAll() {
         return Response.ok(estadoService.findAll()).build();
     }
 
     @GET
+    @RolesAllowed("Paciente")
     @Path("/search/nome/{nome}")
     public Response findByNome(@PathParam("nome") String nome) {
         return Response.ok(estadoService.findByNome(nome)).build();

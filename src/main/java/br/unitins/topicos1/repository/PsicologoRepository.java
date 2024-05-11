@@ -13,4 +13,8 @@ public class PsicologoRepository implements PanacheRepository<Psicologo> {
         return find("UPPER(pessoaFisica.nome) LIKE ?1", "%"+ nome.toUpperCase() + "%").list();
     }
 
+    public Psicologo findByUsernameAndSenha(String username, String senha) {
+        return find("pessoaFisica.usuario.username = ?1 AND pessoaFisica.usuario.senha = ?2", username, senha).firstResult();
+    }
+
 }

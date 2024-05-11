@@ -60,4 +60,6 @@ public class PsicologoResource {
         return Response.status(Status.NO_CONTENT).build();
     }
 
+    
+
 }
