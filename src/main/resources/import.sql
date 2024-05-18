@@ -14,4 +14,17 @@ insert into pessoafisica (id, cpf, id_usuario) values(1, '111.111.111-11', 1);
 
 insert into psicologo (crp, id_pessoa_fisica) values('crp111', 1);
 
+insert into consulta(nome, preco) values ('Consulta Normal', 100);
+insert into consulta(nome, preco) values ('Pacote 1', 100);
+insert into consulta(nome, preco) values ('Pacote 2', 190);
+insert into consulta(nome, preco) values ('Pacote 3', 280);
+insert into consulta(nome, preco) values ('Pacote 4', 370);
+insert into consulta(nome, preco) values ('Pacote 5', 460);
+insert into consulta(nome, preco) values ('Pacote 6', 550);
 
+--insert into consultaavulsa(id, tipoConsulta) values (1, 2);
+
+insert into paciete(nome) values ('Maria');
+insert into paciete(nome) values ('Jeferson');
+insert into paciete(nome) values ('Yzaack');
+insert into paciete(nome) values ('Wesley');
