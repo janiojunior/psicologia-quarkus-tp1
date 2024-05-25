@@ -8,6 +8,7 @@ import jakarta.persistence.OneToOne;
 public class Psicologo extends DefaultEntity {
 
     private String crp;
+    private String nomeImagem;
 
     @OneToOne
     @JoinColumn(name = "id_pessoa_fisica", unique = true)
@@ -28,5 +29,15 @@ public class Psicologo extends DefaultEntity {
     public void setPessoaFisica(PessoaFisica pessoaFisica) {
         this.pessoaFisica = pessoaFisica;
     }
+
+    public String getNomeImagem() {
+        return nomeImagem;
+    }
+
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
+    }
+
+    
 
 }

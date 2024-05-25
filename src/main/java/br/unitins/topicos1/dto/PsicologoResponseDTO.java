@@ -13,6 +13,7 @@ public record PsicologoResponseDTO(
     Sexo sexo,
     String username,
     String senha,
+    String nomeImagem,
     List<TelefoneResponseDTO> telefones
 ) {
     public static PsicologoResponseDTO valueOf(Psicologo psicologo) {
@@ -28,6 +29,7 @@ public record PsicologoResponseDTO(
             psicologo.getPessoaFisica().getSexo(),
             psicologo.getPessoaFisica().getUsuario().getUsername(),
             psicologo.getPessoaFisica().getUsuario().getSenha(),
+            psicologo.getNomeImagem(),
             lista);
     }
     
