@@ -24,7 +24,7 @@ insert into consulta(nome, preco) values ('Pacote 6', 550);
 
 --insert into consultaavulsa(id, tipoConsulta) values (1, 2);
 
-insert into paciete(nome) values ('Maria');
-insert into paciete(nome) values ('Jeferson');
-insert into paciete(nome) values ('Yzaack');
-insert into paciete(nome) values ('Wesley');
+insert into paciente(nome) values ('Maria');
+insert into paciente(nome) values ('Jeferson');
+insert into paciente(nome) values ('Yzaack');
+insert into paciente(nome) values ('Wesley');

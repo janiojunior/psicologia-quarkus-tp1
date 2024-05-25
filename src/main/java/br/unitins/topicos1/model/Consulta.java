@@ -3,7 +3,7 @@ package br.unitins.topicos1.model;
 import jakarta.persistence.Entity;
 
 @Entity
-public class Consulta {
+public class Consulta extends DefaultEntity {
     private String nome;
     private Double preco;
     
