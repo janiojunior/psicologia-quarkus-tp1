@@ -1,5 +1,7 @@
 package br.unitins.topicos1.validation;
 
+import org.jboss.logging.Logger;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -10,6 +12,8 @@ import jakarta.ws.rs.ext.Provider;
 @Provider
 @ApplicationScoped
 public class BeanValidationExceptionMapper implements ExceptionMapper<ConstraintViolationException> {
+
+    private static final Logger LOG = Logger.getLogger(BeanValidationExceptionMapper.class);
 
     @Override
     public Response toResponse(ConstraintViolationException exception) {
@@ -23,6 +27,8 @@ public class BeanValidationExceptionMapper implements ExceptionMapper<Constraint
             String message = violation.getMessage();
             validationError.addFieldError(fieldName, message);
         }
+
+        LOG.error(exception.getMessage());
 
         return Response.status(Response.Status.BAD_REQUEST).entity(validationError).build();
 

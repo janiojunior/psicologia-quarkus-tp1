@@ -1,5 +1,7 @@
 package br.unitins.topicos1.resource;
 
+import org.jboss.logging.Logger;
+
 import br.unitins.topicos1.dto.EstadoDTO;
 import br.unitins.topicos1.service.EstadoService;
 import jakarta.annotation.security.RolesAllowed;
@@ -24,16 +26,21 @@ public class EstadoResource {
     @Inject
     public EstadoService estadoService;
 
+    private static final Logger LOG = Logger.getLogger(EstadoResource.class);
+
     @GET
 
     @Path("/{id}")
     public Response buscarPeloId(@PathParam("id") Long id) {
+        LOG.info("Executando o buscarPeloId");
+        LOG.infof("Executando o método buscarPeloId. Id: %s", id.toString());
         return Response.ok(estadoService.findById(id)).build();
     }
 
     @GET
     @RolesAllowed({"Psicologo", "Paciente"})
     public Response findAll() {
+        LOG.info("Executando o findAll");
         return Response.ok(estadoService.findAll()).build();
     }
 
@@ -52,6 +59,12 @@ public class EstadoResource {
 
     @POST
     public Response create(EstadoDTO dto) {
+        LOG.info("INFO");
+        LOG.warn("WARN");
+        LOG.error("ERROR");
+        LOG.fatal("FATAL");
+        LOG.trace("TRACE");
+        LOG.debugf("DTO: %s", dto);
         return Response.status(Status.CREATED).entity(estadoService.create(dto)).build();
     }
 
